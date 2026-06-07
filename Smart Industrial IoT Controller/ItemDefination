@@ -1,0 +1,78 @@
+{
+  "system_name": "Smart Industrial IoT Controller",
+  "system_description": "An industrial IoT controller built around an ARM Cortex-A53 quad-core SoC running Linux kernel 5.10 with 512 MB DDR4 RAM and 4 GB eMMC flash storage. A JTAG debug port and UART serial console are physically accessible on the PCB with no protection or fusing. The device communicates over Ethernet using Modbus TCP on port 502 and MQTT on port 1883 with no TLS. An HTTP web management interface runs on port 80 with no authentication required by default. Firmware updates are delivered over-the-air via MQTT but are neither signed nor encrypted. U-Boot bootloader is present with no secure boot chain configured. No TPM or hardware root of trust is present. The application is written in C and C++.",
+  "components": {
+    "cpu": {
+      "type": "ARM Cortex-A53",
+      "cores": 4,
+      "frequency": "1.2 GHz",
+      "secure_boot": false
+    },
+    "ram": {
+      "size": "512 MB",
+      "type": "DDR4"
+    },
+    "storage": {
+      "size": "4 GB",
+      "type": "eMMC Flash",
+      "encryption": false
+    },
+    "debug": {
+      "jtag": {
+        "exposed": true,
+        "fused": false
+      },
+      "uart": {
+        "active": true,
+        "device": "/dev/ttyS0"
+      }
+    },
+    "network": {
+      "ethernet": "100 Mbps",
+      "protocols": [
+        {
+          "name": "Modbus TCP",
+          "port": 502,
+          "tls": false
+        },
+        {
+          "name": "MQTT",
+          "port": 1883,
+          "tls": false
+        }
+      ]
+    },
+    "web_ui": {
+      "protocol": "HTTP",
+      "port": 80,
+      "authentication_required": false,
+      "csrf_protection": false
+    },
+    "os": {
+      "kernel": "Linux 5.10",
+      "selinux": false,
+      "apparmor": false,
+      "user_model": "single root user"
+    },
+    "firmware": {
+      "bootloader": "U-Boot",
+      "ota_updates": {
+        "signed": false,
+        "encrypted": false,
+        "rollback_protection": false
+      }
+    },
+    "crypto": {
+      "tpm": false,
+      "hsm": false,
+      "hardware_root_of_trust": false
+    },
+    "application": {
+      "languages": [
+        "C",
+        "C++"
+      ],
+      "shared_libraries": true
+    }
+  }
+}
